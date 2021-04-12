@@ -9,7 +9,7 @@
  */
  import axios from 'axios'
  import { Message } from 'element-ui'
- import qs from "qs"
+//  import qs from "qs"
 
  // 创建一个独立的axios实例
  const service = axios.create({ 
@@ -26,11 +26,11 @@
  // 请求拦截
  service.interceptors.request.use(
      config => {
-        if (config.method === "post") {
-        // 序列化
-        config.data = qs.stringify(config.data);
-        // 温馨提示,若提交能直接接受json 格式,可以不用 qs 来序列化的
-        }
+        // if (config.method === "post") {
+        // // 序列化
+        // config.data = qs.stringify(config.data);
+        // // 温馨提示,若提交能直接接受json 格式,可以不用 qs 来序列化的
+        // }
         return config;
     },
     error => {

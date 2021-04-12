@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import ElementUI from 'element-ui'
-import './styles/index.scss'
 import store from './store'
 import _request from '@/utils/request'
+import '@/styles/index.scss'
+import '../src/assets/css/fcicon.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
 Vue.prototype.request = _request

@@ -1,19 +1,142 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Layout from '../views/Layout/index.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const asyncRoutes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'Dashboard',
+        meta: { title: '主页', icon: 'menu', affix: true }
+      }
+    ]
+  },
+  {
+    path:'/user',
+    component:Layout,
+    redirect: 'noRedirect',
+    children: [
+      {
+        path: 'list',
+        name: 'UserList',
+        component: () => import('@/views/user/index'),
+        meta: { title: '用户列表', icon: 'user', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/university',
+    component: Layout,
+    redirect: 'noRedirect',
+    Name: 'University',
+    meta: {title:'院校信息', icon: 'school'},
+    children: [
+      {
+        path: 'add',
+        name: 'AddUniversity',
+        meta: { title: '增加院校', icon: 'editor'}
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        name: 'EditUniversity',
+        meta: { title: '编辑院校信息', activeMenu: '/university/list' },
+        hidden: true
+      },
+      {
+        path: 'list',
+        component: () => import('@/components/list'),
+        name: 'UniversityList',
+        meta: { title: '院校信息列表', icon: 'list' }
+      }
+    ]
+  },
+  {
+    path: '/major',
+    component: Layout,
+    Name: 'Major',
+    redirect: 'noRedirect',
+    meta: {title:'专业信息', icon: 's-promotion'},
+    children: [
+      {
+        path: 'add',
+        name: 'AddUMajor',
+        meta: { title: '增加专业'}
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        name: 'EditMajor',
+        meta: { title: '编辑专业信息', activeMenu: '/major/list' },
+        hidden: true
+      },
+      {
+        path: 'list',
+        name: 'MajorList',
+        meta: { title: '专业信息列表' }
+      }
+    ]
+  },
+  {
+    path: '/occupation',
+    component: Layout,
+    Name: 'Occupation',
+    redirect: 'noRedirect',
+    meta: {title:'职业信息', icon: 's-cooperation'},
+    children: [
+      {
+        path: 'add',
+        name: 'AddOccupation',
+        meta: { title: '增加职业'}
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        name: 'EditOccupation',
+        meta: { title: '编辑职业信息', activeMenu: '/occupation/list' },
+        hidden: true
+      },
+      {
+        path: 'list',
+        name: 'OccupationList',
+        meta: { title: '职业信息列表'}
+      }
+    ]
+  },
+  {
+    path: '/test',
+    component: Layout,
+    Name: 'test',
+    redirect: 'noRedirect',
+    meta: {title:'性格测试', icon: 's-management'},
+    children: [
+      {
+        path: 'add',
+        name: 'AddTest',
+        meta: { title: '增加测试'}
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        name: 'EditTest',
+        meta: { title: '编辑测试题库', activeMenu: '/test/list' },
+        hidden: true
+      },
+      {
+        path: 'list',
+        name: 'OccupationList',
+        meta: { title: '测试列表'}
+      }
+    ]
   },
 ]
 
+
 const router = new VueRouter({
-  routes
+  routes: asyncRoutes
 })
 
 export default router
