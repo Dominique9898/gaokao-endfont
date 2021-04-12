@@ -13,7 +13,7 @@
 
  // 创建一个独立的axios实例
  const service = axios.create({ 
-     baseURL: 'https://dominikcloud.ltd',
+     baseURL: 'https://dominikcloud.ltd/api',
      headers: {
          post: {
              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
