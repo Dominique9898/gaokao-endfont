@@ -67,7 +67,7 @@
 
       <el-table-column width="240px" align="center" label="学校官网">
         <template slot-scope="scope">
-          <span>{{ scope.row.link }}</span>
+          <span>{{ scope.row.website }}</span>
         </template>
       </el-table-column>
 
@@ -120,10 +120,12 @@ export default {
     getList() {
       this.listLoading = true;
       let that = this;
-      this.request.get("/getlistUniversity").then((res) => {
+      this.request.get("/getlistUniversity", this.listQuery).then((res) => {
         that.listLoading = false;
-        that.list = res.data;
-        console.log(that.list);
+        let data = res.data;
+        that.list = data.list;
+        that.total = data.total
+        console.log(data);
       });
     },
     uploadIconUrl(id) {
