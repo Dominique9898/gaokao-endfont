@@ -58,6 +58,32 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/news',
+    component: Layout,
+    Name: 'News',
+    redirect: 'noRedirect',
+    meta: {title:'高校新闻', icon: 'document'},
+    children: [
+      {
+        path: 'news/create',
+        name: 'AddNews',
+        component: () => import('@/views/createNews'),
+        meta: { title: '创建新闻'}
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        name: 'EditNews',
+        meta: { title: '编辑新闻', activeMenu: '/news/create' },
+        hidden: true
+      },
+      {
+        path: 'news/list',
+        name: 'newsList',
+        meta: { title: '新闻信息列表'}
+      }
+    ]
+  },
+  {
     path: '/major',
     component: Layout,
     Name: 'Major',

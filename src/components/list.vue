@@ -22,7 +22,28 @@
 
       <el-table-column width="300px" label="校徽" align="center">
         <template slot-scope="scope">
-          <i :class="getIconSVG(scope.row.abbreviation)"></i>
+          <el-image
+            v-if="scope.row.icon"
+            style="width: 100px; height: 100px"
+            :src="getlocalPath(scope.row.icon)"
+          >
+          </el-image>
+          <el-upload
+            v-else
+            :limit="1"
+            :show-file-list="false"
+            :action="uploadIconUrl(scope.row.id)"
+            :on-success="handleSuccess"
+          >
+            <el-button
+              type="primary"
+              size="small"
+              icon="el-icon-edit"
+              @click="handleUploadClick(scope.row)"
+            >
+              上传图片
+            </el-button>
+          </el-upload>
         </template>
       </el-table-column>
 
@@ -49,7 +70,6 @@
           <span>{{ scope.row.link }}</span>
         </template>
       </el-table-column>
-
 
       <el-table-column align="center" label="Actions" width="120">
         <template slot-scope="scope">
@@ -78,16 +98,6 @@ import Pagination from "@/components/Pagination"; // Secondary package based on 
 export default {
   name: "ArticleList",
   components: { Pagination },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: "success",
-        draft: "info",
-        deleted: "danger",
-      };
-      return statusMap[status];
-    },
-  },
   data() {
     return {
       list: null,
@@ -97,24 +107,39 @@ export default {
         page: 1,
         limit: 20,
       },
+      currentRow:{}
     };
   },
   created() {
     this.getList();
   },
   methods: {
-    getIconSVG(abbre) {
-      return `fc-icon-${abbre} fc-icon-teda`
+    getlocalPath(path) {
+      return `https://dominikcloud.ltd/images${path}`;
     },
     getList() {
       this.listLoading = true;
       let that = this;
       this.request.get("/getlistUniversity").then((res) => {
-        this.listLoading = false;
+        that.listLoading = false;
         that.list = res.data;
         console.log(that.list);
       });
     },
+    uploadIconUrl(id) {
+      return "https://dominikcloud.ltd/api/university/uploadicon/" + id
+    },
+    handleSuccess(res) {
+      const data = res.data
+      this.currentRow.icon = data.url
+    },
+    handleBeforeUpdate(file) {
+      file.school_id = this.currentRow.id
+      console.log(file);
+    },
+    handleUploadClick(row){
+      this.currentRow = row
+    }
   },
 };
 </script>

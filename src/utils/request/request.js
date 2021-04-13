@@ -14,14 +14,14 @@
 
   function request(url,params,method){
     return new Promise((resolve,reject)=>{
-        let data = {}
+        
         instance({
             url,
             method,
-            ...data
+            params
         }).then((res)=>{
-            if(res.status === 0){
-                resolve(res.data);
+            if(res.code === 0){
+                resolve(res);
             }else{
                 reject(res);
             }
