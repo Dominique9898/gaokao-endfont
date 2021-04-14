@@ -51,7 +51,7 @@ export const asyncRoutes = [
       },
       {
         path: 'list',
-        component: () => import('@/components/list'),
+        component: () => import('@/components/universityList'),
         name: 'UniversityList',
         meta: { title: '院校信息列表', icon: 'list' }
       }
@@ -65,20 +65,22 @@ export const asyncRoutes = [
     meta: {title:'高校新闻', icon: 'document'},
     children: [
       {
-        path: 'news/create',
+        path: 'create',
         name: 'AddNews',
-        component: () => import('@/views/createNews'),
+        component: () => import('@/views/News/createNews'),
         meta: { title: '创建新闻'}
       },
       {
         path: 'edit/:id(\\d+)',
         name: 'EditNews',
+        component: () => import('@/views/News/editNews'),
         meta: { title: '编辑新闻', activeMenu: '/news/create' },
         hidden: true
       },
       {
-        path: 'news/list',
+        path: 'list',
         name: 'newsList',
+        component: () => import('@/components/newsList'),
         meta: { title: '新闻信息列表'}
       }
     ]
