@@ -111,31 +111,6 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/occupation',
-    component: Layout,
-    Name: 'Occupation',
-    redirect: 'noRedirect',
-    meta: {title:'职业信息', icon: 's-cooperation'},
-    children: [
-      {
-        path: 'add',
-        name: 'AddOccupation',
-        meta: { title: '增加职业'}
-      },
-      {
-        path: 'edit/:id(\\d+)',
-        name: 'EditOccupation',
-        meta: { title: '编辑职业信息', activeMenu: '/occupation/list' },
-        hidden: true
-      },
-      {
-        path: 'list',
-        name: 'OccupationList',
-        meta: { title: '职业信息列表'}
-      }
-    ]
-  },
-  {
     path: '/test',
     component: Layout,
     Name: 'test',

@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     getNewsList() {
-      this.request.get("/new/getnewslist", this.listQuery).then((res) => {
+      this.request.get("/getnewslist", this.listQuery).then((res) => {
         let data = res.data;
         this.list = data.list;
         this.listLoading = false;
@@ -91,13 +91,13 @@ export default {
     onDelete(index, row) {
       this.listLoading = true
       let id = row.id
-      this.request.post("/new/deletenews", {id}).then(() => {
+      this.request.post("/deletenews", {id}).then(() => {
         this.$message.success('删除成功')
         this.getNewsList()
       });
     },
     onEdit(index, row) {
-      this.$router.push({ path: `/news/edit/${row.id}`});
+      this.$router.push({ path: `/edit/${row.id}`});
     },
   },
 };

@@ -14,14 +14,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="Name">
+      <el-table-column width="120px" align="center" label="校名">
         <template slot-scope="scope">
-          <span v-if="!scope.row.isEdit">{{ scope.row.name }}</span>
-          <el-input
-            v-else
-            v-model="input"
-            :placeholder="scope.row.name"
-          ></el-input>
+          <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
 
@@ -54,61 +49,41 @@
 
       <el-table-column width="120px" align="center" label="办学类型">
         <template slot-scope="scope">
-          <span v-if="!scope.row.isEdit">{{ scope.row.level }}</span>
-          <el-input
-            v-else
-            v-model="input"
-            :placeholder="scope.row.level"
-          ></el-input>
+          <span>{{ scope.row.level }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="80" align="center" label="排名">
+        <template slot-scope="scope">
+          <span >{{ scope.row.rank }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="120px" align="center" label="省份">
+      <el-table-column width="120px" align="center" label="标签">
         <template slot-scope="scope">
-          <span v-if="!scope.row.isEdit">{{ scope.row.province }}</span>
-          <el-input
-            v-else
-            v-model="input"
-            :placeholder="scope.row.province"
-          ></el-input>
+          <span >{{ scope.row.tag }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column width="80px" align="center" label="省份">
+        <template slot-scope="scope">
+          <span>{{ scope.row.province }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="120px" align="center" label="城市">
+      <el-table-column width="80px" align="center" label="城市">
         <template slot-scope="scope">
-          <span v-if="!scope.row.isEdit">{{ scope.row.city }}</span>
-          <el-input
-            v-else
-            v-model="input"
-            :placeholder="scope.row.city"
-          ></el-input>
+          <span>{{ scope.row.city }}</span>
         </template>
       </el-table-column>
 
       <el-table-column width="240px" align="center" label="学校官网">
         <template slot-scope="scope">
-          <span v-if="!scope.row.isEdit">{{ scope.row.website }}</span>
-          <el-input
-            v-else
-            v-model="input"
-            :placeholder="scope.row.website"
-          ></el-input>
+          <span>{{ scope.row.website }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="Actions" width="120">
+      <el-table-column align="center" label="Actions" width="140">
         <template slot-scope="scope">
           <el-button
-            v-if="scope.row.isEdit"
-            type="primary"
-            size="small"
-            icon="el-icon-edit"
-            @click="onFinished(scope.index, scope)"
-          >
-            完成
-          </el-button>
-          <el-button
-            v-else
             type="primary"
             size="small"
             icon="el-icon-edit"
@@ -144,6 +119,13 @@ export default {
   },
   data() {
     return {
+      editContent: {
+        name:'',
+        level:'',
+        province: '',
+        city: '',
+        website:''
+      },
       list: null,
       total: 0,
       listLoading: true,
@@ -160,7 +142,6 @@ export default {
   },
   methods: {
     getlocalPath(path) {
-      
       return `https://dominikcloud.ltd${path}`;
     },
     getList() {
@@ -170,16 +151,13 @@ export default {
         console.log(res);
         that.listLoading = false;
         let data = res.data;
-        that.list = data.list.map((list) => {
-          list.isEdit = false;
-          return list;
-        });
+        that.list = data.list
         that.total = data.total;
-        console.log(that.list);
+        // console.log(that.list);
       });
     },
     uploadIconUrl(id) {
-      return `${this.baseurl}/university/uploadicon/${id}`;
+      return `${this.baseurl}/uploadicon/${id}`;
     },
     handleSuccess(res) {
       const data = res.data;
