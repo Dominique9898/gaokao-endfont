@@ -97,7 +97,7 @@ export default {
       });
     },
     onEdit(index, row) {
-      this.$router.push({ path: `/edit/${row.id}`});
+      this.$router.push({ path: `/news/edit/${row.id}`});
     },
   },
 };

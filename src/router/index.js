@@ -19,14 +19,14 @@ export const asyncRoutes = [
     ]
   },
   {
-    path:'/user',
+    path:'/user',/*  */
     component:Layout,
     redirect: 'noRedirect',
     children: [
       {
         path: 'list',
         name: 'UserList',
-        component: () => import('@/views/user/index'),
+        component: () => import('@/components/adminList'),
         meta: { title: '用户列表', icon: 'user', affix: true }
       }
     ]
@@ -39,14 +39,16 @@ export const asyncRoutes = [
     meta: {title:'院校信息', icon: 'school'},
     children: [
       {
-        path: 'add',
+        path: 'create',
+        component: () => import('@/views/University/createUniversity'),
         name: 'AddUniversity',
         meta: { title: '增加院校', icon: 'editor'}
       },
       {
         path: 'edit/:id(\\d+)',
         name: 'EditUniversity',
-        meta: { title: '编辑院校信息', activeMenu: '/university/list' },
+        component: () => import('@/views/University/editUniversity'),
+        meta: { title: '编辑院校信息', activeMenu: '/university/create' },
         hidden: true
       },
       {
@@ -95,6 +97,7 @@ export const asyncRoutes = [
       {
         path: 'add',
         name: 'AddUMajor',
+        component: () => import('@/views/Major/createMajor'),
         meta: { title: '增加专业'}
       },
       {
@@ -106,6 +109,7 @@ export const asyncRoutes = [
       {
         path: 'list',
         name: 'MajorList',
+        component: () => import('@/components/majorList'),
         meta: { title: '专业信息列表' }
       }
     ]

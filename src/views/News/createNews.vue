@@ -63,7 +63,7 @@
               :on-success="handleSuccess"
               :on-error="handleError"
               :auto-upload="false"
-              :action="uploadForm"
+              :action="requestBase"
               :data="form"
             >
               <i class="el-icon-plus"></i>
@@ -86,11 +86,11 @@ export default {
     ...mapState({
       baseurl: (state) => state.app.baseurl,
     }),
-    uploadForm() {
+    requestBase() {
       if (this.isEdit) {
-        return `${this.baseurl}/new/updatenew`;
+        return `${this.baseurl}/updatenews`;
       }
-      return `${this.baseurl}/new/uploadnew`;
+      return `${this.baseurl}/uploadnews`;
     },
   },
   props: {
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     fetchData(id) {
-      this.request.get("/new/getnewsbyid", { id }).then((res) => {
+      this.request.get("/getnewsbyid", { id }).then((res) => {
         this.form = res.data;
         if(this.form.img) this.isShowPreview = true
       });
@@ -159,7 +159,8 @@ export default {
       this.loading = false;
     },
     async onFinished() {
-      // this.$refs.upload.sumbit()
+      console.log('onFinished')
+      this.$refs.upload.sumbit()
       let keys = Object.keys(this.form);
       console.log(this.form);
       for (let i = 0; i < keys.length; i++) {
