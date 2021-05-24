@@ -13,6 +13,20 @@ Vue.prototype.request = _request
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.login) {
+    let user = sessionStorage.getItem('userInfo')
+    if (!user) {
+      next({
+        path: '/login'
+      })
+    }
+    next()
+  } else {
+    next()
+  }
+})
+
 new Vue({
   router,
   store,

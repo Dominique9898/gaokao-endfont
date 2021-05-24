@@ -1,4 +1,5 @@
 const getters = {
+    isLogin: state => state.app.isLogin,
     baseurl: state => state.app.baseurl,
     sidebar: state => state.app.sidebar,
     size: state => state.app.size,

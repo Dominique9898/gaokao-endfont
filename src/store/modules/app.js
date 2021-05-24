@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 
 const state = {
+  isLogin: false,
   sidebar: {
     opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
@@ -11,6 +12,9 @@ const state = {
 }
 
 const mutations = {
+  SET_LOGIN_STATUS: (state, status) => {
+    state.isLogin = status
+  },
   TOGGLE_SIDEBAR: state => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
@@ -35,6 +39,9 @@ const mutations = {
 }
 
 const actions = {
+  setLoginStatus({commit}, status) {
+    commit('SET_LOGIN_STATUS', status)
+  },
   toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },

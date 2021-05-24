@@ -38,14 +38,14 @@
  service.interceptors.response.use((response)=>{
      // 获取接口返回结果
      const res = response.data;
-     if(res.code === 0){
+     if(res.code == 0){
          return res;
      }else if(res.code === 10000){
          Message.warning(res.message);
          window.location.href = '/#/login';
          return res;
-     }else if(res.code === 1){
-         console.error(res);
+     }else if(res.code == 1){
+        Message.error(res.message)
      }
  });
  export default service;

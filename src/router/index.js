@@ -6,6 +6,11 @@ Vue.use(VueRouter)
 
 export const asyncRoutes = [
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login')
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -14,7 +19,7 @@ export const asyncRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: '主页', icon: 'menu', affix: true }
+        meta: { title: '主页', icon: 'menu', affix: true, login:true }
       }
     ]
   },

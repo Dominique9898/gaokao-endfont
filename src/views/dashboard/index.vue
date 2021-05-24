@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    {{currentRole}}
+    {{user.username}},欢迎回来,{{currentRole}}
   </div>
 </template>
 
@@ -8,9 +8,13 @@
 
 export default {
   name: 'Dashboard',
+  created(){
+    user = sessionStorage.getItem('userinfo')
+  },
   data() {
     return {
-      currentRole: 'adminDashboard'
+      user: {},
+      currentRole: '智能高考后台管理系统'
     }
   },
 }

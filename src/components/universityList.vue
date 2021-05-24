@@ -81,7 +81,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="Actions" width="140">
+      <el-table-column align="center" label="Actions" width="220">
         <template slot-scope="scope">
           <el-button
             type="primary"
